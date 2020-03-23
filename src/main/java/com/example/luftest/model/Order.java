@@ -70,7 +70,7 @@ public class Order {
     }
 
     public String getDtOrder() {
-        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String strDate = dateFormat.format(dtOrder);
         return strDate;
     }

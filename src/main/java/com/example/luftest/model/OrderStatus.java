@@ -29,6 +29,9 @@ public class OrderStatus {
         this.name = name;
         this.orders = new ArrayList<>();
     }
+    public OrderStatus(int id){
+        this.id = id;
+    }
 
     public int getId() {
         return id;

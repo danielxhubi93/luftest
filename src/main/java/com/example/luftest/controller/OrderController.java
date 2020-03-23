@@ -31,7 +31,7 @@ public class OrderController {
         } else {
             username = principal.toString();
         }
-        if (username == "admin"){
+        if (String.valueOf(username).equals("admin")){
             orderResponseList = orderService.findAllByBookUserAndStatus();
         }
         else{

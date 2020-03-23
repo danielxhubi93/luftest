@@ -42,7 +42,7 @@ public class OrderService {
     }
 
     public void updateOrderStatusById(int id, int status){
-        orderRepository.updateOrderStatusById(id,status);
+        orderRepository.updateOrderStatusById(status,id);
     }
 
     public List<Order> findByIdUser(int iduser){

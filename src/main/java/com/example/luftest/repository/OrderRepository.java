@@ -3,6 +3,7 @@ package com.example.luftest.repository;
 import com.example.luftest.dto.OrderResponse;
 import com.example.luftest.model.Book;
 import com.example.luftest.model.Order;
+import com.example.luftest.model.OrderStatus;
 import com.example.luftest.model.User;
 import org.hibernate.transform.Transformers;
 import org.springframework.data.jpa.repository.JpaRepository;

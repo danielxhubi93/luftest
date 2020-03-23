@@ -59,7 +59,7 @@ public class Book {
     }
 
     public String getDtAdded() {
-        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String strDate = dateFormat.format(dtAdded);
         return strDate;
     }
