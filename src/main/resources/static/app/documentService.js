@@ -30,7 +30,5 @@ App.factory('docService', ['$http', '$q', 'urls', function ($http, $q, urls) {
             );
         return deferred.promise;
     };
-
-
 }
 ]);

@@ -7,6 +7,8 @@ import com.example.luftest.service.BookService;
 import com.example.luftest.service.OrderService;
 import org.jsondoc.core.annotation.ApiPathParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -21,7 +23,21 @@ public class OrderController {
     }
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public List<OrderResponse> getAll(){
-        return orderService.findAllByBookUserAndStatus();
+        List<OrderResponse> orderResponseList = new ArrayList<>();
+        String username;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails)principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+        if (username == "admin"){
+            orderResponseList = orderService.findAllByBookUserAndStatus();
+        }
+        else{
+            orderResponseList = orderService.findAllByUsername(username);
+        }
+        return orderResponseList;
     }
 
     @RequestMapping(value = "/orderbyuser/{iduser}", method = RequestMethod.GET)

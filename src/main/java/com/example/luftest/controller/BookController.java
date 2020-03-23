@@ -14,6 +14,9 @@ import com.example.luftest.viewmodel.BookViewModel;
 import com.example.luftest.viewmodel.OrderViewModel;
 import org.jsondoc.core.annotation.ApiPathParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.w3c.dom.Document;
@@ -33,6 +36,8 @@ public class BookController {
     private UserService userService;
     @Autowired
     OrderStatusRepository orderStatusRepository;
+
+
     public BookController() {
     }
     @RequestMapping(value = "/all", method = RequestMethod.GET)
@@ -53,8 +58,15 @@ public class BookController {
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public List<Book> savebook(@RequestParam(value="file") MultipartFile file) throws IOException {
-        User user = userService.findById(34);
-        Book book = new Book(file.getName(), user, file.getBytes());
+        String username;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+             username = ((UserDetails)principal).getUsername();
+        } else {
+             username = principal.toString();
+        }
+        User user = userService.findByUsername(username);
+        Book book = new Book(file.getOriginalFilename().substring(0, file.getOriginalFilename().lastIndexOf('.')), user, file.getBytes());
         bookService.saveBook(book);
         return bookService.findAll();
     }

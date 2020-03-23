@@ -27,7 +27,12 @@ public class OrderService {
 
     public List<OrderResponse> findAllByBookUserAndStatus(){
         List<Object> obj = orderRepository.findAllByBookUserAndStatus();
-
+        @SuppressWarnings("unchecked")
+        List<OrderResponse> list = (List<OrderResponse>)(List<?>)obj;
+        return list;
+    }
+    public List<OrderResponse> findAllByUsername(String username){
+        List<Object> obj = orderRepository.findAllByUsername(username);
         @SuppressWarnings("unchecked")
         List<OrderResponse> list = (List<OrderResponse>)(List<?>)obj;
         return list;

@@ -5,18 +5,10 @@ App.controller('docController',
 
         $scope.upload = function(){
             var file = $scope.file;
-            var book = {
-                "title" : $scope.title,
-                "user_id" : 4
-            };
             docService.saveDoc(file)
                 .then(
                     function (response) {
-                        alert("file uploaded successfully.");
-                        $http.get("http://localhost:1212/api/books/all").then(
-                            function(response) {
-
-                            });
+                        alert("Book saved successfully.");
                     },
                     function (errResponse) {
 

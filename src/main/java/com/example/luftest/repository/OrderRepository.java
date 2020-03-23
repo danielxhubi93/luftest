@@ -34,6 +34,13 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
             " JOIN orders_status os on os.id = o.status_id", nativeQuery = true)
      public List<Object> findAllByBookUserAndStatus();
 
+    @Query(value = "SELECT o.id as orderId, DATE_FORMAT(o.dt_order, '%d/%m/%y') as dt_order, b.title, u.username, os.name as status " +
+            " FROM orders o " +
+            " JOIN books b on b.id = o.book_id" +
+            " JOIN users u on u.id = o.user_id" +
+            " JOIN orders_status os on os.id = o.status_id WHERE u.username = :username", nativeQuery = true)
+    public List<Object> findAllByUsername(@Param("username") String username);
+
 
 
 }

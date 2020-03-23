@@ -13,7 +13,7 @@
             <!-- Get all orders -->
             <div class="btn-group" role="group">
                 <button sec:authorize="hasRole('ADMIN')" ng-click="vm.getAll()" type="button" class="btn btn-default">All</button>
-                <button sec:authorize="hasRole('USER')" ng-click="vm.getUserOrders()" type="button" class="btn btn-default">My Orders</button>
+                <button sec:authorize="hasRole('USER')" ng-click="vm.getAll()" type="button" class="btn btn-default">My Orders</button>
             </div>
             <!-- Display orders in a table -->
             <table sec:authorize="isAuthenticated()" class="table">
@@ -23,8 +23,8 @@
                     <th>User</th>
                     <th>Status</th>
                     <th>Order Date</th>
-                    <th style="width: 90px"></th>
-                    <th style="width: 90px"></th>
+                    <th  sec:authorize="hasRole('ADMIN')" style="width: 90px"></th>
+                    <th  sec:authorize="hasRole('ADMIN')" style="width: 90px"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -33,10 +33,10 @@
                     <td>{{order[3]}}</td>
                     <td>{{order[4]}}</td>
                     <td>{{order[1]}}</td>
-                    <td>
-                        <button class="btn btn-success" ng-click="vm.changeOrderStatus(order.idOrder, '1')">Accept</button>
+                    <td sec:authorize="hasRole('ADMIN')">
+                        <button class="btn btn-success" ng-click="vm.changeOrderStatus(order[0], '1')">Accept</button>
                     </td>
-                    <td>
+                    <td sec:authorize="hasRole('ADMIN')">
                         <button class="btn btn-danger" ng-click="vm.changeOrderStatus(order[0], '2')">Reject</button>
                     </td>
                 </tr>
