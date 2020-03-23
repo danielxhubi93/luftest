@@ -20,6 +20,17 @@ import java.time.ZoneOffset;
 import java.util.List;
 
 public interface OrderRepository extends JpaRepository<Order, Integer> {
+    @Query(value = "select * from book_db.orders o " +
+            "WHERE book_id = :book_id and o.status_id in (1,3)" , nativeQuery = true)
+    Order findByBookAndStatus(@Param("book_id") int bookId);
+
+    @Query(value = "select * from book_db.orders o " +
+            "WHERE id = :order_id and o.status_id in (1,2)" , nativeQuery = true)
+    Order findByIdAndStatus (@Param("order_id") int order_id);
+
+    @Query(value = "select * from book_db.orders o " +
+            "WHERE book_id = :book_id and user_id = :user_id  and o.status_id in (1,3)" , nativeQuery = true)
+    Order findByBookAndStatusAndUser(@Param("book_id") int bookId,@Param("user_id") int userId);
 
     List<Order> findByUser(User user);
     @Transactional

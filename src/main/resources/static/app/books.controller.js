@@ -56,7 +56,7 @@
             };
             var url = "api/books/order/save";
             $http.post(url, order).then(function(response){
-                alert("Order placed successfully!");
+                alert(response.data.response);
             }, function errorCallback(response) {
             alert("Error while placing order! Try Again!");
         });
@@ -64,8 +64,8 @@
         function deleteBook(idBook){
             var url = "api/books/delete/" + idBook;
             $http.post(url).then(function(response){
-                alert("Book deleted successfully!");
-                vm.books = response.data;
+                alert(response.data.response);
+                getAll();
             }, function errorCallback(response) {
                 alert("Error while deleting book! Try Again!");
             });

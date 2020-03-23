@@ -1,11 +1,9 @@
 package com.example.luftest.service;
 
 import com.example.luftest.dto.OrderResponse;
-import com.example.luftest.model.Book;
 import com.example.luftest.model.Order;
 import com.example.luftest.model.OrderStatus;
 import com.example.luftest.model.User;
-import com.example.luftest.repository.BookRepository;
 import com.example.luftest.repository.OrderRepository;
 import com.example.luftest.repository.OrderStatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,16 +43,35 @@ public class OrderService {
         }
         return list;
     }
-    public void saveOrder(Order order){
-        orderRepository.save(order);
+    public String saveOrder(Order order){
+        try {
+            Order existOrder = orderRepository.findByBookAndStatusAndUser(order.getBook().getIdBook(),order.getUser().getUserId());
+            if (existOrder == null) {
+                orderRepository.save(order);
+                return "Order was placed successfully!";
+            }
+        else { return "Order already placed!"; }
+        }
+        catch (Exception ex){
+            return "Error while placing the order!";
+        }
     }
-
     public void deleteOrder(int idOrder){
         orderRepository.deleteById(idOrder);
     }
 
-    public void updateOrderStatusById(int id, int status){
-        orderRepository.updateOrderStatusById(status,id);
+    public String updateOrderStatusById(int orderId, int statusId){
+        try {
+            Order order = orderRepository.findByIdAndStatus(orderId);
+            if(order == null){
+                orderRepository.updateOrderStatusById(statusId,orderId);
+                return  "Status of the order changed successfully!";
+            }
+            else { return  "Error! Status can not be changed!"; }
+        }
+        catch (Exception ex){
+            return  "Error! Status can not be changed!";
+        }
     }
 
     public List<Order> findByIdUser(int iduser){

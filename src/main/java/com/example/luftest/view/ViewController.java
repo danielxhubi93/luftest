@@ -37,13 +37,6 @@ public class ViewController {
         return "orders";
     }
 
-    @GetMapping("admin/registration")
-    public String registration(Model model){
-        User user = new User();
-        model.addAttribute("user",user);
-        return "admin/registration";
-    }
-
     @GetMapping("books")
     public String books(){
         return "books";
@@ -54,7 +47,6 @@ public class ViewController {
 
     @GetMapping("addbook")
     public String addbook(){return "addbook";}
-
 
     @RequestMapping(value = "/username", method = RequestMethod.GET)
     @ResponseBody
