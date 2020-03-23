@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -26,15 +28,19 @@ public class OrderService {
     }
 
     public List<OrderResponse> findAllByBookUserAndStatus(){
-        List<Object> obj = orderRepository.findAllByBookUserAndStatus();
-        @SuppressWarnings("unchecked")
-        List<OrderResponse> list = (List<OrderResponse>)(List<?>)obj;
+        List<OrderResponse> list = new ArrayList<>();
+        Collection<Object[]> lst = orderRepository.findAllByBookUserAndStatus();
+        for(Object[] obj : lst){
+            list.add(new OrderResponse((int) obj[0],(String) obj[1],(String)  obj[2],(String)   obj[3],(String)  obj[4]));
+        }
         return list;
     }
     public List<OrderResponse> findAllByUsername(String username){
-        List<Object> obj = orderRepository.findAllByUsername(username);
-        @SuppressWarnings("unchecked")
-        List<OrderResponse> list = (List<OrderResponse>)(List<?>)obj;
+        List<OrderResponse> list = new ArrayList<>();
+        Collection<Object[]> lst = orderRepository.findAllByUsername(username);
+        for(Object[] obj : lst){
+            list.add(new OrderResponse((int) obj[0],(String) obj[1],(String)  obj[2],(String)   obj[3],(String)  obj[4]));
+        }
         return list;
     }
     public void saveOrder(Order order){

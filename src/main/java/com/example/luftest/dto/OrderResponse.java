@@ -5,17 +5,25 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import javax.persistence.Embedded;
+import java.util.Date;
+
 
 public class OrderResponse {
+    @Embedded
     private int idOrder;
-    private String dt_order;
+    @Embedded
+    private String dtOrder;
+    @Embedded
     private  String title;
+    @Embedded
     private String username;
+    @Embedded
     private String status;
 
-    public OrderResponse(int idOrder, String dt_order, String title, String username, String status) {
+    public OrderResponse(int idOrder, String dtOrder, String title, String username, String status) {
         this.idOrder = idOrder;
-        this.dt_order = dt_order;
+        this.dtOrder = dtOrder;
         this.title = title;
         this.username = username;
         this.status = status;
@@ -29,12 +37,12 @@ public class OrderResponse {
         this.idOrder = idOrder;
     }
 
-    public String getDt_order() {
-        return dt_order;
+    public String getDtOrder() {
+        return dtOrder;
     }
 
-    public void setDt_order(String dt_order) {
-        this.dt_order = dt_order;
+    public void setDtOrder(String dtOrder) {
+        this.dtOrder = dtOrder;
     }
 
     public String getTitle() {

@@ -29,15 +29,15 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="order in vm.orders">
-                    <td>{{order[2]}}</td>
-                    <td>{{order[3]}}</td>
-                    <td>{{order[4]}}</td>
-                    <td>{{order[1]}}</td>
+                    <td>{{order.title}}</td>
+                    <td>{{order.username}}</td>
+                    <td>{{order.status}}</td>
+                    <td>{{order.dtOrder}}</td>
                     <td sec:authorize="hasRole('ADMIN')">
-                        <button class="btn btn-success" ng-click="vm.changeOrderStatus(order[0], '1')">Accept</button>
+                        <button class="btn btn-success" ng-click="vm.changeOrderStatus(order.idOrder, '1')">Accept</button>
                     </td>
                     <td sec:authorize="hasRole('ADMIN')">
-                        <button class="btn btn-danger" ng-click="vm.changeOrderStatus(order[0], '2')">Reject</button>
+                        <button class="btn btn-danger" ng-click="vm.changeOrderStatus(order.idOrder, '2')">Reject</button>
                     </td>
                 </tr>
                 </tbody>
