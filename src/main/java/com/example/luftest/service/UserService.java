@@ -1,15 +1,10 @@
 package com.example.luftest.service;
 
-import com.example.luftest.model.Book;
 import com.example.luftest.model.User;
 import com.example.luftest.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -37,7 +32,6 @@ public class UserService {
         }
         else {
             User newuser = new User(user.getUsername(), passwordEncoder.encode(user.getPassword()));
-            // Save to db
             userRepository.save(newuser);
             return "User saved successfully!";
         }
@@ -51,9 +45,12 @@ public class UserService {
             return "User updated successfully!";
         }
     }
-    public void deleteUser(String username){
+    public String deleteUser(String username){
         User user =  userRepository.findByUsername(username);
-        userRepository.delete(user);
+        if (userRepository.findUserByBooksAndOrders(user.getUserId()) == null){
+            userRepository.delete(user);
+            return "User deleted successfully!";
+        }
+        else { return "User can not be deleted!";}
     }
-
 }

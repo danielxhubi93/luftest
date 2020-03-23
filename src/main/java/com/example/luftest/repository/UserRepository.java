@@ -21,6 +21,11 @@ public interface UserRepository extends JpaRepository<User, Integer> {
    void updateUserByUsername(@Param("username") String username, @Param("id") int id);
 
    @Query("SELECT u FROM User u WHERE u.role = :role")
-   List<User> findUserByRoleNamedParams(
-           @Param("role") String role);
+   List<User> findUserByRoleNamedParams(@Param("role") String role);
+
+   @Query(value = "SELECT * FROM book_db.users u " +
+                   " WHERE  u.role = 'USER' and u.id = :user_id " +
+                   " and exists (select 1 from book_db.books b where b.user_id = u.id) " +
+                   " and exists (select 1 from book_db.orders o where o.user_id = u.id)", nativeQuery = true)
+   User findUserByBooksAndOrders(@Param("user_id") int UserId);
 }

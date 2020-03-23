@@ -30,12 +30,13 @@
                 alert("Error. Try Again!");
             });
         }
+
         $scope.createUser = function () {
             var url = "/api/users/save/";
             var usersPromise = $http.post(url, $scope.user);
             usersPromise.then(function(response) {
-                $scope.users = response.data;
-                alert("User has created Successfully");
+                getAll();
+                alert(response.data.response);
             }, function(response) {
                 alert("Error while creating user! Try Again!");
             });
@@ -45,8 +46,8 @@
             var url = "/api/users/update/";
             var usersPromise = $http.post(url + $scope.user.username, $scope.user);
             usersPromise.then(function (response) {
-                $scope.users = response.data;
-                alert("User has updated successfully");
+               getAll();
+                alert(response.data.response);
             }, function (response) {
                 alert("Error while updating user! Try Again!");
             });
@@ -54,8 +55,8 @@
         $scope.deleteUser = function(user){
             var url = "/api/users/delete/" + user.username;
             $http.post(url).then(function(response){
-                $scope.users = response.data;
-                alert("User deleted successfully!");
+                getAll();
+                alert(response.data.response);
             }, function errorCallback(response) {
                 alert("Error while deleting user! Try Again!");
             });
