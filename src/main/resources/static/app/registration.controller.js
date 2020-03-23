@@ -22,7 +22,12 @@
             var url = "/api/registration/add/" + vm.user.username + "/" + vm.user.password;
             $http.post(url).then(function(response){
                 alert(response.data);
-            });
+            }, function(response) {
+                alert(response.data)
+                    //an error has occurred.  get details from data
+                    //get http status from response.status
+                    //get data from response.data
+                });
         }
     }
 })();

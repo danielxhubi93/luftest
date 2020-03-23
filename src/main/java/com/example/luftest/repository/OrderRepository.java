@@ -21,7 +21,7 @@ import java.util.List;
 public interface OrderRepository extends JpaRepository<Order, Integer> {
 
     List<Order> findByUser(User user);
-
+    @Transactional
     @Modifying
     @Query("UPDATE Order u set u.status.id = :status where u.idOrder = :id")
     void updateOrderStatusById(@Param("status") int status, @Param("id") int id);

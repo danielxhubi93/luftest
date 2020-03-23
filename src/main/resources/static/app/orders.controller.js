@@ -50,6 +50,7 @@
             var url = "api/orders/orderstatus/" + id + "/" + status;
             $http.post(url).then(function(response){
                 vm.orders = response.data;
+                alert("Order status updated successfully!");
             });
         }
     }

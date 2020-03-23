@@ -4,6 +4,8 @@ import com.example.luftest.model.Book;
 import com.example.luftest.model.User;
 import com.example.luftest.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -26,14 +28,32 @@ public class UserService {
     public List<User> findAll(){
         return userRepository.findAll();
     }
-    public void saveUser(String username,String password){
-        User newuser = new User(username, passwordEncoder.encode(password));
-        List<User> users = Arrays.asList(newuser);
-        // Save to db
-        this.userRepository.saveAll(users);
+    public String saveUser(User user){
+        if (user.getUsername() == null || user.getUsername() == "" || user.getPassword() == "" || user.getPassword() == null) {
+            return "Error saving the User!";
+        }
+        if (userRepository.findByUsername(user.getUsername()) != null){
+            return "User already exists! Try a different one!";
+        }
+        else {
+            User newuser = new User(user.getUsername(), passwordEncoder.encode(user.getPassword()));
+            // Save to db
+            userRepository.save(newuser);
+            return "User saved successfully!";
+        }
     }
-    public void deleteUser(int id){
-        userRepository.deleteById(id);
+    public String updateUser(int id, String username){
+        if (userRepository.findByUsername(username) != null){
+            return "User already exists! Try a different one!";
+        }
+        else {
+            userRepository.updateUserByUsername(username, id);
+            return "User updated successfully!";
+        }
+    }
+    public void deleteUser(String username){
+        User user =  userRepository.findByUsername(username);
+        userRepository.delete(user);
     }
 
 }
