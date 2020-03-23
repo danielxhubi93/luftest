@@ -23,21 +23,7 @@ public class OrderController {
     }
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public List<OrderResponse> getAll(){
-        List<OrderResponse> orderResponseList = new ArrayList<>();
-        String username;
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (principal instanceof UserDetails) {
-            username = ((UserDetails)principal).getUsername();
-        } else {
-            username = principal.toString();
-        }
-        if (String.valueOf(username).equals("admin")){
-            orderResponseList = orderService.findAllByBookUserAndStatus();
-        }
-        else{
-            orderResponseList = orderService.findAllByUsername(username);
-        }
-        return orderResponseList;
+        return orderService.getOrders();
     }
 
     @RequestMapping(value = "/orderbyuser/{iduser}", method = RequestMethod.GET)
@@ -52,8 +38,14 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public List<OrderResponse> saveorder(@RequestBody Order order){
+    public List<OrderResponse> saveOrder(@RequestBody Order order){
         orderService.saveOrder(order);
         return orderService.findAllByBookUserAndStatus();
     }
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public List<OrderResponse> deleteOrder(@PathVariable int idOrder){
+        orderService.deleteOrder(idOrder);
+        return orderService.getOrders();
+    }
+
 }

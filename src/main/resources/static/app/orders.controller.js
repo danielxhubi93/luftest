@@ -51,6 +51,17 @@
             $http.post(url).then(function(response){
                 vm.orders = response.data;
                 alert("Order status updated successfully!");
+            }, function errorCallback(response) {
+                alert("Error changing order status! Try Again!");
+            });
+        }
+        function deleteOrder(idOrder){
+            var url = "api/order/delete/" + idOrder;
+            $http.post(url).then(function(response){
+                alert("Order deleted successfully!");
+                vm.books = response.data;
+            }, function errorCallback(response) {
+                alert("Error while deleting book! Try Again!");
             });
         }
     }

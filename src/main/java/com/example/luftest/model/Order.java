@@ -33,7 +33,6 @@ public class Order {
     @JsonIgnore
     private OrderStatus status;
 
-
     public Order() {
     }
     public Order(int idOrder, Book book, User user, OrderStatus status) {
@@ -43,7 +42,6 @@ public class Order {
         this.status = status;
 
     }
-
 
     public int getIdOrder() {
         return idOrder;

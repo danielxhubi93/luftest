@@ -33,6 +33,9 @@
                     <td>{{order.username}}</td>
                     <td>{{order.status}}</td>
                     <td>{{order.dtOrder}}</td>
+                    <td sec:authorize="hasRole('USER')">
+                        <button class="btn btn-danger" ng-click="vm.deleteOrder(order.idOrder)">Delete</button>
+                    </td>
                     <td sec:authorize="hasRole('ADMIN')">
                         <button class="btn btn-success" ng-click="vm.changeOrderStatus(order.idOrder, '1')">Accept</button>
                     </td>

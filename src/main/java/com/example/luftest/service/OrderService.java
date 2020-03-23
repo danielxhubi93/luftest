@@ -9,6 +9,8 @@ import com.example.luftest.repository.BookRepository;
 import com.example.luftest.repository.OrderRepository;
 import com.example.luftest.repository.OrderStatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 
@@ -47,6 +49,10 @@ public class OrderService {
         orderRepository.save(order);
     }
 
+    public void deleteOrder(int idOrder){
+        orderRepository.deleteById(idOrder);
+    }
+
     public void updateOrderStatusById(int id, int status){
         orderRepository.updateOrderStatusById(status,id);
     }
@@ -54,6 +60,17 @@ public class OrderService {
     public List<Order> findByIdUser(int iduser){
         User user = new User(iduser);
         return orderRepository.findByUser(user);
+    }
+    public List<OrderResponse> getOrders(){
+        List<OrderResponse> orderResponseList = new ArrayList<>();
+        String username;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) { username = ((UserDetails)principal).getUsername(); }
+        else { username = principal.toString(); }
+
+        if (String.valueOf(username).equals("admin")){ orderResponseList = findAllByBookUserAndStatus(); }
+        else{ orderResponseList = findAllByUsername(username); }
+        return orderResponseList;
     }
 }
 

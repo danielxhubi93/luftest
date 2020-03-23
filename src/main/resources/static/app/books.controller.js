@@ -17,7 +17,6 @@
         vm.deleteBook = deleteBook;
         vm.orderBook = orderBook;
 
-
         init();
 
         function init(){
@@ -30,6 +29,8 @@
             var booksPromise = $http.get(url);
             booksPromise.then(function(response){
                 vm.books = response.data;
+            }, function errorCallback(response) {
+                alert("Error!");
             });
         }
 
@@ -55,13 +56,18 @@
             };
             var url = "api/books/order/save";
             $http.post(url, order).then(function(response){
-                alert(response.data);
-            });
+                alert("Order placed successfully!");
+            }, function errorCallback(response) {
+            alert("Error while placing order! Try Again!");
+        });
         }
         function deleteBook(idBook){
             var url = "api/books/delete/" + idBook;
             $http.post(url).then(function(response){
+                alert("Book deleted successfully!");
                 vm.books = response.data;
+            }, function errorCallback(response) {
+                alert("Error while deleting book! Try Again!");
             });
         }
     }

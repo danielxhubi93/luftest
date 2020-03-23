@@ -37,7 +37,6 @@ public class BookController {
     @Autowired
     OrderStatusRepository orderStatusRepository;
 
-
     public BookController() {
     }
     @RequestMapping(value = "/all", method = RequestMethod.GET)
