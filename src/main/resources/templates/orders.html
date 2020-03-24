@@ -7,9 +7,10 @@
 <script type="text/javascript" src="/static/app/orders.controller.js" th:src="@{/app/orders.controller.js}"></script>
 <body ng-app="app" ng-controller="OrderController as vm">
 <header th:insert="fragments.html :: nav"></header>
-<div>
-    <div class="row">
-        <div class="col-lg-offset-2 col-lg-8">
+
+<div class="container h-100" style="padding: 10px;">
+    <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-12">
             <!-- Get all orders -->
             <div class="btn-group" role="group">
                 <button sec:authorize="hasRole('ADMIN')" ng-click="vm.getAll()" type="button" class="btn btn-default">All</button>

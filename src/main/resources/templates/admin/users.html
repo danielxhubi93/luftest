@@ -10,12 +10,12 @@
 <script type="text/javascript" src="/static/app/users.controller.js" th:src="@{/app/users.controller.js}"></script>
 
 <body sec:authorize="hasRole('ADMIN')" ng-app="app" ng-controller="UserController">
-<div class="container">
-    <div class="row">
-        <div class="col-xs-6" style="border: 1px solid;padding: 15px;">
+<div class="container h-100" style="padding: 10px;">
+    <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-sm" style="border: 1px solid;padding: 15px;">
             <form ng-submit="createUser()">
                 <div class="row">
-                    <div class="col-lg-offset-2 col-lg-8">
+                    <div class="col-lg">
                         <h4>Create User</h4>
                         <div class="form-group" ng-show="username">
                             <label >Username</label>
@@ -38,9 +38,9 @@
                 </div>
             </form>
         </div>
-        <div class="col-xs-6">
+        <div class="col-sm">
             <div class="row">
-                <div class="col-lg-offset-2 col-lg-8">
+                <div class="col-lg">
                     <h4>Users List</h4>
                     <table  class="table table-striped">
                         <thead>

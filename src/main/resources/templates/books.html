@@ -8,11 +8,11 @@
     <script type="text/javascript" src="/static/app/books.controller.js" th:src="@{/app/books.controller.js}"></script>
 <body ng-app="app" ng-controller="BookController as vm">
 <header th:insert="fragments.html :: nav"></header>
-<div>
-    <div class="row">
-        <div class="col-lg-offset-2 col-lg-8">
+<div class="container h-100" style="padding: 10px;">
+    <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-12">
             <!-- Get all books -->
-            <div class="btn-group" role="group">
+            <div class="text-left" role="group">
                 <button ng-click="vm.getAll()" type="button" class="btn btn-default">All</button>
                 <button sec:authorize="hasRole('USER')" ng-click="vm.getUserBooks()" type="button" class="btn btn-default">My Books</button>
                 <button sec:authorize="isAuthenticated()"  type="button" class="btn btn-default"><a class="nav-link" href="#" th:href="@{~/addbook}">Add Book</a></button>
