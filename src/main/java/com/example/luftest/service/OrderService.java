@@ -55,8 +55,14 @@ public class OrderService {
             return "Error while placing the order!";
         }
     }
-    public void deleteOrder(int idOrder){
-        orderRepository.deleteById(idOrder);
+    public String deleteOrder(int idOrder){
+        try {
+            orderRepository.deleteById(idOrder);
+            return "Order deleted successfully!";
+        }
+        catch (Exception ex){
+            return "Error deleting the order!";
+        }
     }
 
     public String updateOrderStatusById(int orderId, int statusId){

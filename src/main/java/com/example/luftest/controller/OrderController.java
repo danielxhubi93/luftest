@@ -33,17 +33,11 @@ public class OrderController {
         return Collections.singletonMap("response", response);
     }
 
-    //Requests to save order
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public List<OrderResponse> saveOrder(@RequestBody Order order){
-        orderService.saveOrder(order);
-        return orderService.findAllByBookUserAndStatus();
-    }
     //Requests to delete an order
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public List<OrderResponse> deleteOrder(@PathVariable int idOrder){
-        orderService.deleteOrder(idOrder);
-        return orderService.getOrders();
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST ,produces = MediaType.APPLICATION_JSON_VALUE)
+    public Map deleteOrder(@PathVariable int idOrder){
+        String response = orderService.deleteOrder(idOrder);
+        return Collections.singletonMap("response", response);
     }
 
 }

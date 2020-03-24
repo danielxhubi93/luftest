@@ -14,7 +14,7 @@
         vm.orders = [];
         vm.getAll = getAll;
         vm.changeOrderStatus = changeOrderStatus;
-
+        vm.deleteOrder = deleteOrder;
         init();
 
         function init(){
@@ -50,7 +50,7 @@
         function deleteOrder(idOrder){
             var url = "api/order/delete/" + idOrder;
             $http.post(url).then(function(response){
-                alert("Order deleted successfully!");
+                alert(response.data.response);
                 vm.books = response.data;
             }, function errorCallback(response) {
                 alert("Error while deleting book! Try Again!");
