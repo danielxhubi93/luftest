@@ -8,7 +8,7 @@ App.controller('docController',
             docService.saveDoc(file)
                 .then(
                     function (response) {
-                        alert("Book saved successfully.");
+                        alert(response.data.response);
                     },
                     function (errResponse) {
 

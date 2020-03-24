@@ -62,10 +62,10 @@ public class BookController {
         } else {
              username = principal.toString();
         }
-        User user = userService.findByUsername(username);
-        Book book = new Book(file.getOriginalFilename().substring(0, file.getOriginalFilename().lastIndexOf('.')), user, file.getBytes());
-        String response =  bookService.saveBook(book);
-        return Collections.singletonMap("response", response);
+            User user = userService.findByUsername(username);
+            Book book = new Book(file.getOriginalFilename().substring(0, file.getOriginalFilename().lastIndexOf('.')), user, file.getBytes());
+            String response =  bookService.saveBook(book);
+            return Collections.singletonMap("response", response);
     }
 
     //Request to order a book

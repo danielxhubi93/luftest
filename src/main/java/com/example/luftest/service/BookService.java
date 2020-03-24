@@ -26,8 +26,14 @@ public class BookService {
     }
     public String saveBook(Book book){
         try {
-            bookRepository.save(book);
-            return "Book was saved successfully!";
+            Book existbook = bookRepository.findByTitle(book.getTitle());
+            if(existbook == null){
+                bookRepository.save(book);
+                return "Book was saved successfully!";
+            }
+            else {
+                return "Book already exists!";
+            }
         }
         catch(Exception e) {
             return "Error while saving the book!";

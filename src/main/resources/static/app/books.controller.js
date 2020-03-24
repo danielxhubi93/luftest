@@ -1,22 +1,20 @@
 
 (function () {
     'use strict';
-
     angular
         .module('app')
         .controller('BookController', BookController);
-
     BookController.$inject = ['$http'];
 
     function BookController($http) {
         var iduser = 0;
         var vm = this;
         vm.books = [];
+        vm.modalDisplay = '';
         vm.getAll = getAll;
         vm.getUserBooks = getUserBooks;
         vm.deleteBook = deleteBook;
         vm.orderBook = orderBook;
-
         init();
 
         function init(){

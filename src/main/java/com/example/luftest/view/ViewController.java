@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import java.security.Principal;
 
-//Controller to get all html forms
+//Controller to get all html forms/views
 @Controller
 @RequestMapping("/")
 public class ViewController {

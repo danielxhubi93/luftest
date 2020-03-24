@@ -2,7 +2,6 @@
 var App = angular.module('app',[]);
 
 App.factory('docService', ['$http', '$q', 'urls', function ($http, $q, urls) {
-
     var factory = {
         saveDoc: saveDoc,
     };
