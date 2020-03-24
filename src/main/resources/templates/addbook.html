@@ -5,6 +5,14 @@
 <script type="text/javascript" src="/static/angular.min.js" th:src="@{/angular.min.js}"></script>
 <script src="../static/app/documentService.js" th:src="@{/app/documentService.js}"></script>
 <script src="../static/app/app.js"  th:src="@{/app/app.js}"></script>
+<style>
+    .custom-file-upload {
+        border: 1px solid #ccc;
+        display: inline-block;
+        padding: 6px 12px;
+        cursor: pointer;
+    }
+</style>
 <body ng-app="app" ng-controller="docController">
 <header th:insert="fragments.html :: nav"></header>
 <form name="form" role="form">
@@ -18,7 +26,12 @@
                     </div>
                     <div class="form-group">
                         <label>Choose the book to upload (Max 5 MB)</label>
-                        <input accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" type="file" class="custom-file-input" file-model="file">
+                        <div class="form-group">
+                        <label for="file-upload" class="custom-file-upload">
+                            <i class="fa fa-cloud-upload"></i>Choose file
+                        </label>
+                        <input style="display: none" id="file-upload" accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" type="file" class="custom-file-input" file-model="file">
+                        </div>
                     </div>
 
                     <button type="button" ng-click="upload()" class="btn btn-primary">Save</button>
