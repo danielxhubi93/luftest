@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
+//User Service with all the User functions
 @Service
 public class UserService {
     @Autowired

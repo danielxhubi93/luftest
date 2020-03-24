@@ -1,10 +1,10 @@
-package com.example.luftest.viewmodel;
+package com.example.luftest.dto;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
 
-public class OrderViewModel {
+//Define the Order model the client sends to the service
+public class OrderRequest {
     private String id;
     @NotNull
     @Min(3)

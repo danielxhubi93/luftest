@@ -4,14 +4,12 @@ import com.example.luftest.model.CustomUserDetail;
 import com.example.luftest.model.User;
 import com.example.luftest.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.AbstractAuditable_;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+//Service to handle the login
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
     @Autowired

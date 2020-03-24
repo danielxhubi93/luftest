@@ -7,9 +7,9 @@ import com.example.luftest.repository.BookRepository;
 import com.example.luftest.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
+//Book Service with all the book functions
 @Service
 public class BookService {
     @Autowired

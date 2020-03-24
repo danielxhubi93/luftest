@@ -1,14 +1,8 @@
 package com.example.luftest.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-
 import javax.persistence.Embedded;
-import java.util.Date;
 
-
+//Define the Order model to display to the client
 public class OrderResponse {
     @Embedded
     private int idOrder;
@@ -21,6 +15,7 @@ public class OrderResponse {
     @Embedded
     private String status;
 
+    //Constructor
     public OrderResponse(int idOrder, String dtOrder, String title, String username, String status) {
         this.idOrder = idOrder;
         this.dtOrder = dtOrder;
@@ -29,6 +24,7 @@ public class OrderResponse {
         this.status = status;
     }
 
+    //Getters and setters
     public int getIdOrder() {
         return idOrder;
     }

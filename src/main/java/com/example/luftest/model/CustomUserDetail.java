@@ -3,11 +3,11 @@ package com.example.luftest.model;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+//Handle user login and authorities of the user
 public class CustomUserDetail implements UserDetails {
     private User user;
     public CustomUserDetail(User user) {

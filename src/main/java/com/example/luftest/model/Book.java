@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+//Books table
 @Entity
 @Table(name="books")
 public class Book {
